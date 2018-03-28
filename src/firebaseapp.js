@@ -11,4 +11,5 @@ var config = {
 
 export const firebaseApp = firebase.initializeApp(config)
 export const perolasRef = firebase.database().ref().child('perolas')
-export const ownersRef = firebase.database().ref().child('owners')
+export const charactersRef = firebase.database().ref().child('characters')
+export const highscoresRef = firebase.database().ref().child('highscores')

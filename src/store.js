@@ -7,7 +7,11 @@ import rootReducer from './reducers'
 
 const store = createStore(
     rootReducer,
-    applyMiddleware(thunk)
+    applyMiddleware(thunk),
 )
+
+store.propTypes = {
+    store: PropTypes.object.isRequired
+}
 
 export default store

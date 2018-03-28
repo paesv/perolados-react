@@ -22,7 +22,7 @@ module.exports = {
             {
                 test: /\.scss$/,
                 exclude: /node_modules/,
-                loader: 'style-loader!css-loader!sass-loader!' + path.resolve('loaders/inject-global-scss') 
+                loader: 'style-loader!css-loader!sass-loader!' + path.resolve('loaders/globalSassVariables') 
             }
               
         ]
@@ -34,18 +34,16 @@ module.exports = {
     output: {
         path: __dirname + '/dist',
         publicPath: '/',
-        filename: 'bundle.js'
+        filename: 'bundle.js',
+        globalObject: 'this'
     },
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
         // Global Sweetalert
         new webpack.ProvidePlugin({
-            'swal' : 'sweetalert2'
+            'swal' : 'sweetalert2',
+            'PropTypes' : 'prop-types'
         }),
-
-        new webpack.ProvidePlugin({
-            'propTypes' : 'prop-types'
-        })
     ],
     devServer: {
         contentBase: './dist',

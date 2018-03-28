@@ -3,7 +3,10 @@ import {
 } from './LoginActions'
 
 const initialState = {
-    user: {}
+    user: {
+        uid: "EntSjDxcvmh08bVBeOKGCfqWQQG3",
+        displayName: "Vitor Paes"
+    }
 }
 
 const LoginReducer = (state = initialState, action) => {

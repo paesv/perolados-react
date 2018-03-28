@@ -11,23 +11,28 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-const mapStateToProps = state => {
-    return {
-        user: state.loginStore.user
-    }
-}
-
 class LoginContainer extends Component {
-    componentWillReceiveProps(nextProps) {
-        console.log(nextProps)
+    // Methods
+    handleLoginRequest() {
+        this.props.loginRequest().then((response) => {
+            if(response) {
+                this.props.router.push('/dashboard')
+            }
+        }).catch((error) => {
+            swal({
+                title: "Ocorreu um erro ao fazer login",
+                text: error,
+                type: "error"
+            })
+        })
     }
 
     render() {
         return (
             <div className="text-center">
-                <div>Perolados</div>
+                {/* <div>Perolados</div> */}
                 
-                <button className="btn btn-primary" onClick={this.props.loginRequest}>
+                <button className="btn btn-primary" onClick={() => this.handleLoginRequest()}>
                 Fazer login com Google
                 </button>
             </div>
@@ -35,4 +40,4 @@ class LoginContainer extends Component {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(LoginContainer);
+export default connect(null, mapDispatchToProps)(LoginContainer);

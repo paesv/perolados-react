@@ -14,15 +14,19 @@ export const login = (user) => {
 export const loginRequest = () => {
     const provider = new firebase.auth.GoogleAuthProvider()
     return (dispatch) => {
-        return firebase.auth().signInWithPopup(provider).then((result) => {
-            var token = result.credential.accessToken
-            var user = result.user
-            
-            // Dispatch user to reducer
-            dispatch(login(user))
-
-        }).catch((error) => {
-            console.log("Login error - " + error)
+        return new Promise ((resolve, reject) => {
+            firebase.auth().signInWithPopup(provider).then((result) => {
+                var token = result.credential.accessToken
+                var user = result.user
+                
+                // Dispatch user to reducer
+                resolve(true)
+                dispatch(login(user))
+    
+            }).catch((error) => {
+                console.log("Login error - " + error)
+                reject(error)
+            })
         })
     }
 }
